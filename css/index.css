@@ -1,0 +1,69 @@
+body
+{
+    background-color: black;
+    padding: 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Top */
+
+#day
+{
+	font-size: 64px;
+}
+
+#weather
+{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 240px;
+	height: 240px;
+}
+
+/* Middle */
+
+#middle
+{
+	display: flex;
+	justify-content: center;
+}
+
+#clock > #time
+{
+	font-size: 320px;s
+}
+
+#clock > #period
+{
+	font-size: 64px;
+}
+
+/* Bottom */
+
+#months-container
+{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: flex-end;
+}
+
+.month
+{
+	opacity: .16;
+} 
+
+.month *
+{
+	font-size: 32px;
+} 
+
+.month.highlighted
+{
+	font-weight: bold;
+	opacity: 1;
+}
