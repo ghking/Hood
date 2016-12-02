@@ -97,13 +97,13 @@ function updateWeatherWithPosition(position)
 			{
 				// Update the temperature
 
-				var temperature = data["currently"]["icon"]
+				var temperature = data["currently"]["apparentTemperature"]
 
 				if (temperature)
 				{
 					var roundedTemperature = Math.round(temperature)
 
-					$("#temperature").text(roundedTemperature)
+					$("#temperature").text(roundedTemperature + "°")
 				}
 
 				// Update the icon
