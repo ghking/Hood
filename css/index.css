@@ -10,16 +10,26 @@ body
 
 /* Top */
 
+#top
+{
+	height: 64px;
+}
+
 #day
 {
 	font-size: 64px;
 }
 
+#temperature
+{
+	font-size: 64px;
+
+	float: right;
+}
+
 #weather
 {
-	position: absolute;
-	top: 0px;
-	right: 0px;
+	float: right;
 	width: 240px;
 	height: 240px;
 }
@@ -32,12 +42,12 @@ body
 	justify-content: center;
 }
 
-#clock > #time
+#clock-time
 {
 	font-size: 320px;s
 }
 
-#clock > #period
+#clock-period
 {
 	font-size: 64px;
 }
@@ -62,7 +72,7 @@ body
 	font-size: 32px;
 } 
 
-.month.highlighted
+.month-highlighted
 {
 	font-weight: bold;
 	opacity: 1;
