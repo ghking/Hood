@@ -95,37 +95,50 @@ function updateWeatherWithPosition(position)
 			dataType: "jsonp",
 			success: function (data) 
 			{
-				// Update the temperature
-
 				var temperature = data["currently"]["apparentTemperature"]
+				var descriptionKey = data["currently"]["icon"]
 
-				if (temperature)
+				if (temperature && descriptionKey)
 				{
+					// Update the temperature
+
 					var roundedTemperature = Math.round(temperature)
 
 					$("#temperature").text(roundedTemperature + "°")
-				}
 
-				// Update the icon
+					// Update the icon
 
-				var descriptionKey = data["currently"]["icon"]
-
-				if (descriptionKey)
-				{
 					populateWeatherIconWithDescriptionKey(descriptionKey)
 				}
-			}
+				else
+				{
+					resetWeather()
+				}
+			},
+		    error: function() 
+		    {
+				resetWeather()
+		    }
 		})
 	}
 }
 
-// Helpers
+// Time Helpers
 
 function resetCalendar()
 {
 	$(".month-highlighted").removeClass("month-highlighted")
 
 	$(".month-number").empty()
+}
+
+// Weather Helpers
+
+function resetWeather()
+{
+	$("#temperature").empty()
+
+	$("#weather-icon").removeAttr("src")
 }
 
 function populateWeatherIconWithDescriptionKey(descriptionKey)
@@ -151,6 +164,8 @@ function populateWeatherIconWithDescriptionKey(descriptionKey)
 		$("#weather-icon").attr("src", src) 
 	}
 }
+
+// General Helpers
 
 function parameterWithName(name) 
 {
