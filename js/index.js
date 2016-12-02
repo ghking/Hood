@@ -2,11 +2,11 @@ $(document).ready(function()
 {
 	// Update the time every second
 
+	updateTime()
+
 	setInterval(function() 
 	{
-		updateDay();
-		updateClock();
-		updateCalendar();
+		updateTime()
 
 	}, 1000)
 
@@ -14,6 +14,8 @@ $(document).ready(function()
 
 	navigator.geolocation.getCurrentPosition(function(position) 
 	{
+		updateWeatherWithPosition(position);
+
 		setInterval(function() 
 		{
 			updateWeatherWithPosition(position);
@@ -21,6 +23,13 @@ $(document).ready(function()
 		}, 100000)
 	});
 });
+
+function updateTime()
+{
+	updateDay();
+	updateClock();
+	updateCalendar();
+}
 
 function updateDay()
 {
