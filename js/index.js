@@ -1,15 +1,28 @@
 $(document).ready(function() 
 {
-	// TODO: Live Updates
+	// Update the time every second
 
-	populateDay();
-	populateTime();
-	populateMonths();
+	setInterval(function() 
+	{
+		updateDay();
+		updateClock();
+		updateCalendar();
 
-	navigator.geolocation.getCurrentPosition(populateWeather);
+	}, 1000)
+
+	// Update the weather every 10 minutes
+
+	navigator.geolocation.getCurrentPosition(function(position) 
+	{
+		setInterval(function() 
+		{
+			updateWeatherWithPosition(position);
+
+		}, 10000)
+	});
 });
 
-function populateDay()
+function updateDay()
 {
 	var date = new Date();
 
@@ -28,7 +41,7 @@ function populateDay()
 	$("#day").text(weekday);
 }
 
-function populateTime()
+function updateClock()
 {
 	var date = new Date();
 
@@ -36,39 +49,43 @@ function populateTime()
 
 	if (timeComponents.length > 0)
 	{
-		$("#clock > #time").text(timeComponents[0]);
+		$("#clock-time").text(timeComponents[0]);
 	}
 
 	if (timeComponents.length > 1)
 	{
-		$("#clock > #period").text(timeComponents[1]);
+		$("#clock-period").text(timeComponents[1]);
 	}
 }
 
-function populateMonths()
+function updateCalendar()
 {
+	resetCalendar()
+
 	var date = new Date();
 
 	var monthIndex = date.getMonth()
 
 	var monthDiv = $("#months-container").children().eq(monthIndex);
 
-	monthDiv.addClass("highlighted")
+	monthDiv.addClass("month-highlighted")
 
-	monthDiv.find(".number").text(date.getDate())
+	monthDiv.find(".month-number").text(date.getDate())
 }
 
-function populateWeather(position)
+function updateWeatherWithPosition(position)
 {
-	var forecastKey = parameterWithName("forecast_key")
+	var latitude = position.coords.latitude
 
-	if (forecastKey)
+	var darkSkyKey = parameterWithName("dark_sky_key")
+
+	if (darkSkyKey)
 	{
 		$.ajax({
-			url: "https://api.darksky.net/forecast/" + forecastKey + "/" + position.coords.latitude + "," + position.coords.longitude,
+			url: "https://api.darksky.net/forecast/" + darkSkyKey + "/" + position.coords.latitude + "," + position.coords.longitude,
 			dataType: "jsonp",
-			success: function (data) {
-
+			success: function (data) 
+			{
 				// TODO: Populate Temperature
 
 				var descriptionKey = data["currently"]["icon"]
@@ -83,6 +100,13 @@ function populateWeather(position)
 }
 
 // Helpers
+
+function resetCalendar()
+{
+	$(".month-highlighted").removeClass("month-highlighted")
+
+	$(".month-number").empty()
+}
 
 function populateWeatherWithDescriptionKey(descriptionKey)
 {
