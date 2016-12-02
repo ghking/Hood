@@ -18,7 +18,7 @@ $(document).ready(function()
 		{
 			updateWeatherWithPosition(position);
 
-		}, 10000)
+		}, 100000)
 	});
 });
 
@@ -86,13 +86,24 @@ function updateWeatherWithPosition(position)
 			dataType: "jsonp",
 			success: function (data) 
 			{
-				// TODO: Populate Temperature
+				// Update the temperature
+
+				var temperature = data["currently"]["icon"]
+
+				if (temperature)
+				{
+					var roundedTemperature = Math.round(temperature)
+
+					$("#temperature").text(roundedTemperature)
+				}
+
+				// Update the icon
 
 				var descriptionKey = data["currently"]["icon"]
 
 				if (descriptionKey)
 				{
-					populateWeatherWithDescriptionKey(descriptionKey)
+					populateWeatherIconWithDescriptionKey(descriptionKey)
 				}
 			}
 		})
@@ -108,10 +119,8 @@ function resetCalendar()
 	$(".month-number").empty()
 }
 
-function populateWeatherWithDescriptionKey(descriptionKey)
+function populateWeatherIconWithDescriptionKey(descriptionKey)
 {
-	alert(descriptionKey)
-
 	var iconMap = {
 
 		"clear-day": "assets/sunny.svg", 
@@ -130,7 +139,7 @@ function populateWeatherWithDescriptionKey(descriptionKey)
 
 	if (src)
 	{
-		$("#weather").attr("src", src) 
+		$("#weather-icon").attr("src", src) 
 	}
 }
 
