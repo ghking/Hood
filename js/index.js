@@ -1,10 +1,10 @@
-$(document).ready(function() 
+$(document).ready(function()
 {
 	// Update the time every second
 
 	updateTime()
 
-	setInterval(function() 
+	setInterval(function()
 	{
 		updateTime()
 
@@ -12,11 +12,11 @@ $(document).ready(function()
 
 	// Update the weather every 10 minutes
 
-	navigator.geolocation.getCurrentPosition(function(position) 
+	navigator.geolocation.getCurrentPosition(function(position)
 	{
 		updateWeatherWithPosition(position);
 
-		setInterval(function() 
+		setInterval(function()
 		{
 			updateWeatherWithPosition(position);
 
@@ -93,7 +93,7 @@ function updateWeatherWithPosition(position)
 		$.ajax({
 			url: "https://api.darksky.net/forecast/" + darkSkyKey + "/" + position.coords.latitude + "," + position.coords.longitude,
 			dataType: "jsonp",
-			success: function (data) 
+			success: function (data)
 			{
 				var temperature = data["currently"]["apparentTemperature"]
 				var descriptionKey = data["currently"]["icon"]
@@ -115,10 +115,10 @@ function updateWeatherWithPosition(position)
 					resetWeather()
 				}
 			},
-		    error: function() 
-		    {
+			error: function()
+			{
 				resetWeather()
-		    }
+			}
 		})
 	}
 }
@@ -145,15 +145,15 @@ function populateWeatherIconWithDescriptionKey(descriptionKey)
 {
 	var iconMap = {
 
-		"clear-day": "assets/sunny.svg", 
-		"clear-night": "assets/moony.svg",  
-		"rain": "assets/rainy.svg", 
-		"snow": "assets/snowy.svg", 
-		"sleet": "assets/rainy.svg", 
-		"wind": "assets/windy.svg", 
-		"fog": "assets/cloudy.svg", 
-		"cloudy": "assets/cloudy.svg", 
-		"partly-cloudy-day": "assets/partly_cloudy.svg", 
+		"clear-day": "assets/sunny.svg",
+		"clear-night": "assets/moony.svg",
+		"rain": "assets/rainy.svg",
+		"snow": "assets/snowy.svg",
+		"sleet": "assets/rainy.svg",
+		"wind": "assets/windy.svg",
+		"fog": "assets/cloudy.svg",
+		"cloudy": "assets/cloudy.svg",
+		"partly-cloudy-day": "assets/partly_cloudy.svg",
 		"partly-cloudy-night": "assets/moony.svg"
 	}
 
@@ -161,30 +161,30 @@ function populateWeatherIconWithDescriptionKey(descriptionKey)
 
 	if (src)
 	{
-		$("#weather-icon").attr("src", src) 
+		$("#weather-icon").attr("src", src)
 	}
 }
 
 // General Helpers
 
-function parameterWithName(name) 
+function parameterWithName(name)
 {
-    var url = window.location.href;
+	var url = window.location.href;
 
-    name = name.replace(/[\[\]]/g, "\\$&");
+	name = name.replace(/[\[\]]/g, "\\$&");
 
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
-    var results = regex.exec(url);
+	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+	var results = regex.exec(url);
 
-    if (!results)
-    {
-    	return null;
-    }
+	if (!results)
+	{
+		return null;
+	}
 
-    if (!results[2])
-    {
-  		return '';
-    }
+	if (!results[2])
+	{
+		return '';
+	}
 
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
 }

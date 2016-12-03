@@ -12,44 +12,43 @@ body
 
 #top
 {
-	height: 64px;
+    height: 64px;
 }
 
 #day
 {
-	font-size: 64px;
+    font-size: 64px;
 }
 
 #temperature
 {
-	font-size: 64px;
-
-	float: right;
+    font-size: 64px;
+    float: right;
 }
 
 #weather-icon
 {
-	float: right;
-	width: 192px;
-	margin-left: 16px;
+    float: right;
+    width: 192px;
+    margin-left: 16px;
 }
 
 /* Middle */
 
 #middle
 {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #clock-time
 {
-	font-size: 320px;s
+    font-size: 320px;s
 }
 
 #clock-period
 {
-	font-size: 64px;
+    font-size: 64px;
 }
 
 /* Bottom */
@@ -64,16 +63,16 @@ body
 
 .month
 {
-	opacity: .16;
-} 
+    opacity: .16;
+}
 
 .month *
 {
-	font-size: 32px;
-} 
+    font-size: 32px;
+}
 
 .month-highlighted
 {
-	font-weight: bold;
-	opacity: 1;
+    font-weight: bold;
+    opacity: 1;
 }
